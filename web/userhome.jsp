@@ -13,6 +13,8 @@
     </head>
     <body>
         <h1>Hello User!</h1>
+        <a href="createEvent.jsp">Create Event</a>
+        <a href="eventList.jsp">Event List</a>
         <a href="index.jsp">Log out</a>
     </body>
 </html>
