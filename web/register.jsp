@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 11 Apr 16, 13:17:38
+    Document   : register
+    Created on : May 9, 2016, 8:56:01 AM
     Author     : haris.dwi
 --%>
 
@@ -9,16 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Page</title>
+        <title>Registration Page</title>
     </head>
     <body>
-        <form action="validation.jsp" method="POST">
+        <form action="registerValidation.jsp" method="POST">
             <b>Username:</b><br>
             <input type="text" name="username" required><br>
+            <b>Email:</b><br>
+            <input type="text" name="email" required><br>
             <b>Password:</b><br>
             <input type="password" name="password" required><br>
             <input type="submit" name="submit" value="Submit">
         </form>
-        <br><a href="register.jsp">Register</a>
     </body>
 </html>
