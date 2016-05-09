@@ -22,24 +22,21 @@
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(db_url, db_user, db_pass);
             Statement statement = connection.createStatement();
-            //String count = "Select count(*) as total from event";
-            //ResultSet resultSet = statement.executeQuery(count);
+            String count = "Select count(*) from event";
+            ResultSet resultSet = statement.executeQuery(count);
             
-            DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+            DateFormat df = new SimpleDateFormat("dd/MM/yy");
             
-            int num = 0;
+            int num = Integer.parseInt(resultSet.getObject(1).toString()) + 1;
             String title = request.getParameter("title");
             String location = request.getParameter("location");
-            String sdate = request.getParameter("sdate");
-            String edate = request.getParameter("edate");
+            Date sdate = new java.sql.Date((df.parse(request.getParameter("sdate"))).getTime());
+            Date edate = new java.sql.Date((df.parse(request.getParameter("edate"))).getTime());
             String cat = request.getParameter("cat");
             String desc = request.getParameter("desc");
             
-            String query = "INSERT INTO `event`(`eventid`, `title`, `location`, `startdate`, `enddate`, `category`, `desc`) VALUES ("+num+",'"+title+"','"+location+"','"+sdate+"','"+edate+"','"+cat+"','"+desc+"')";
-            
+            String query = "insert into event(num,title,location,sdate,edate,cat,desc) values("+num+",'"+title+"','"+location+"','"+sdate+"','"+edate+"','"+cat+"','"+desc+"')";
             statement.executeUpdate(query);
-            response.sendRedirect("userhome.jsp");
         %>
-        
     </body>
 </html>
