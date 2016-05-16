@@ -39,6 +39,9 @@
                 out.println("</html>");
             }
             else{
+                Cookie uname = new Cookie("username", username);
+                uname.setMaxAge(Integer.MAX_VALUE);
+                response.addCookie(uname);
                 resultSet.next();
                 role = resultSet.getObject(1) + "";
             }

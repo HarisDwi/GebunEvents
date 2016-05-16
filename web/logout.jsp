@@ -1,6 +1,6 @@
 <%-- 
-    Document   : adminhome
-    Created on : Apr 11, 2016, 2:45:31 PM
+    Document   : logout
+    Created on : May 16, 2016, 4:33:44 PM
     Author     : haris.dwi
 --%>
 
@@ -15,18 +15,13 @@
         <%
             Cookie[] cookies = request.getCookies();
             Cookie cookie;
-            String username = "null";
             if(cookies != null){
                 for(int i = 0; i < cookies.length; i++){
                     cookie = cookies[i];
-                    if(cookie.getName().equals("username"))
-                        username = cookie.getValue();
+                    cookie.setMaxAge(0);
                }
             }
-            out.print("<h1>Hello " + username + "!</h1><br>");
+            response.sendRedirect("index.jsp");
         %>    
-        <a href="createEvent.jsp">Create Event</a>
-        <a href="eventList.jsp">Event List</a>
-        <a href="logout.jsp">Log out</a>
     </body>
 </html>

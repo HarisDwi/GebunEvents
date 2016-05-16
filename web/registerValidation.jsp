@@ -39,7 +39,7 @@
                 out.println("</html>");
             }
             else{
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("index.jsp");                
             }
         %>    
     </body>
