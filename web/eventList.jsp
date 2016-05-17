@@ -32,6 +32,9 @@
                 out.print(metaData.getColumnName(i));
                 out.print("</td>");
             }
+            out.print("<td>");
+            out.print("delete");
+            out.print("</td>");
             out.print("</tr>");
             while (resultSet.next()) {
                 out.print("<tr>");
@@ -40,6 +43,9 @@
                     out.print(resultSet.getObject(i));
                     out.print("</td>");
                 }
+                out.print("<td>");
+                out.print("<a href=\"delete.jsp?id=" + resultSet.getObject(1) + "\">Delete</a>");
+                out.print("</td>");
                 out.print("</tr>");
             }
             out.print("</table>");
