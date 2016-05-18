@@ -16,12 +16,20 @@
             Cookie[] cookies = request.getCookies();
             Cookie cookie;
             String username = "null";
-            if(cookies != null){
-                for(int i = 0; i < cookies.length; i++){
+            if (cookies != null) {
+                for (int i = 0; i < cookies.length; i++) {
                     cookie = cookies[i];
-                    if(cookie.getName().equals("username"))
+                    if (cookie.getName().equals("username")) {
                         username = cookie.getValue();
-               }
+                    }
+                    if (cookie.getName().equals("role")) {
+                        if (cookie.getValue().equals("1")) {
+                            response.sendRedirect("userhome.jsp");
+                        }
+                    }
+                }
+            } else {
+                response.sendRedirect("index.jsp");
             }
             out.print("<h1>Hello " + username + "!</h1><br>");
         %>    

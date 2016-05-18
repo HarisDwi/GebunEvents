@@ -20,6 +20,10 @@
         <link href="css/shop-homepage.css" rel="stylesheet">
     </head>
     <body>
+        <%
+            Cookie[] cookies = request.getCookies();
+            if(cookies == null) response.sendRedirect("index.jsp");
+        %>    
         <div class="container">
 
             <div class="row">

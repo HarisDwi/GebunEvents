@@ -13,7 +13,21 @@
         <title>List Of Event</title>
     </head>
     <body>
-         <%
+        <%
+            Cookie[] cookies = request.getCookies();
+            Cookie cookie;
+            if (cookies != null) {
+                for (int i = 0; i < cookies.length; i++) {
+                    cookie = cookies[i];
+                    if (cookie.getName().equals("role")) {
+                        if (cookie.getValue().equals("1")) {
+                            response.sendRedirect("userhome.jsp");
+                        }
+                    }
+                }
+            } else {
+                response.sendRedirect("index.jsp");
+            }
             String db_user = "root";
             String db_pass = "632146rockyou";
             String db_url = "jdbc:mysql://localhost/lawui-haris";
@@ -22,7 +36,7 @@
             Statement statement = connection.createStatement();
             String query = "SELECT * from event";
             ResultSet resultSet = statement.executeQuery(query);
-            
+
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
             out.print("<table border = '1'>");
