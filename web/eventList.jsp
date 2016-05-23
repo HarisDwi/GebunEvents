@@ -13,7 +13,7 @@
         <title>List Of Event</title>
     </head>
     <body>
-        <%
+         <%
             Cookie[] cookies = request.getCookies();
             Cookie cookie;
             if (cookies != null) {
@@ -36,7 +36,7 @@
             Statement statement = connection.createStatement();
             String query = "SELECT * from event";
             ResultSet resultSet = statement.executeQuery(query);
-
+            
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();
             out.print("<table border = '1'>");

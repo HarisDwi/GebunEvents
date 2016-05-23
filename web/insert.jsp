@@ -16,6 +16,22 @@
     </head>
     <body>
         <%
+            Cookie[] cookies = request.getCookies();
+                Cookie cookie;
+                String username = "";
+                if (cookies != null) {
+                    for (int i = 0; i < cookies.length; i++) {
+                        cookie = cookies[i];
+                        if (cookie.getName().equals("username")) {
+                            username = cookie.getValue();
+                        }
+                        if (cookie.getName().equals("role")) {
+                            if (cookie.getValue().equals("2")) {
+                                response.sendRedirect("adminhome.jsp");
+                            }
+                        }
+                    }
+                }
             String db_user = "root";
             String db_pass = "632146rockyou";
             String db_url = "jdbc:mysql://localhost/lawui-haris";
@@ -27,7 +43,7 @@
             
             DateFormat df = new SimpleDateFormat("dd/MM/yy");
             
-            int num = Integer.parseInt(resultSet.getObject(1).toString()) + 1;
+            //int num = Integer.parseInt(resultSet.getObject(1).toString()) + 1;
             String title = request.getParameter("title");
             String location = request.getParameter("location");
             Date sdate = new java.sql.Date((df.parse(request.getParameter("sdate"))).getTime());
@@ -35,7 +51,7 @@
             String cat = request.getParameter("cat");
             String desc = request.getParameter("desc");
             
-            String query = "insert into event(num,title,location,sdate,edate,cat,desc) values("+num+",'"+title+"','"+location+"','"+sdate+"','"+edate+"','"+cat+"','"+desc+"')";
+            String query = "insert into event(title,location,sdate,edate,cat,description,user) values('"+title+"','"+location+"','"+sdate+"','"+edate+"','"+cat+"','"+desc+"','"+username+"')";
             statement.executeUpdate(query);
         %>
     </body>

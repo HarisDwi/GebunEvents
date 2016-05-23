@@ -16,30 +16,43 @@
     </head>
     <body>
         <%
+            Cookie[] cookies = request.getCookies();
+                Cookie cookie;
+                String username = "";
+                if (cookies != null) {
+                    for (int i = 0; i < cookies.length; i++) {
+                        cookie = cookies[i];
+                        if (cookie.getName().equals("username")) {
+                            username = cookie.getValue();
+                        }
+                        if (cookie.getName().equals("role")) {
+                            if (cookie.getValue().equals("2")) {
+                                response.sendRedirect("adminhome.jsp");
+                            }
+                        }
+                    }
+                }
             String db_user = "root";
             String db_pass = "632146rockyou";
             String db_url = "jdbc:mysql://localhost/lawui-haris";
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(db_url, db_user, db_pass);
             Statement statement = connection.createStatement();
-            //String count = "Select count(*) as total from event";
-            //ResultSet resultSet = statement.executeQuery(count);
+            String count = "Select count(*) from event";
+            ResultSet resultSet = statement.executeQuery(count);
             
-            DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+            DateFormat df = new SimpleDateFormat("dd/MM/yy");
             
-            int num = 0;
+            //int num = Integer.parseInt(resultSet.getObject(1).toString()) + 1;
             String title = request.getParameter("title");
             String location = request.getParameter("location");
-            String sdate = request.getParameter("sdate");
-            String edate = request.getParameter("edate");
+            Date sdate = new java.sql.Date((df.parse(request.getParameter("sdate"))).getTime());
+            Date edate = new java.sql.Date((df.parse(request.getParameter("edate"))).getTime());
             String cat = request.getParameter("cat");
             String desc = request.getParameter("desc");
             
-            String query = "INSERT INTO `event`(`eventid`, `title`, `location`, `startdate`, `enddate`, `category`, `desc`) VALUES ("+num+",'"+title+"','"+location+"','"+sdate+"','"+edate+"','"+cat+"','"+desc+"')";
-            
+            String query = "insert into event(title,location,sdate,edate,cat,description,user) values('"+title+"','"+location+"','"+sdate+"','"+edate+"','"+cat+"','"+desc+"','"+username+"')";
             statement.executeUpdate(query);
-            response.sendRedirect("userhome.jsp");
         %>
-        
     </body>
 </html>

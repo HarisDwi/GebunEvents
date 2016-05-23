@@ -39,14 +39,8 @@
                 out.println("</html>");
             }
             else{
-                Cookie uname = new Cookie("username", username);
-                uname.setMaxAge(Integer.MAX_VALUE);
-                response.addCookie(uname);
                 resultSet.next();
                 role = resultSet.getObject(1) + "";
-                Cookie urole = new Cookie("role", role);
-                urole.setMaxAge(Integer.MAX_VALUE);
-                response.addCookie(urole);
             }
             if(role.equals("1")){
                 response.sendRedirect("userhome.jsp");

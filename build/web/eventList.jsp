@@ -14,6 +14,20 @@
     </head>
     <body>
          <%
+            Cookie[] cookies = request.getCookies();
+            Cookie cookie;
+            if (cookies != null) {
+                for (int i = 0; i < cookies.length; i++) {
+                    cookie = cookies[i];
+                    if (cookie.getName().equals("role")) {
+                        if (cookie.getValue().equals("1")) {
+                            response.sendRedirect("userhome.jsp");
+                        }
+                    }
+                }
+            } else {
+                response.sendRedirect("index.jsp");
+            }
             String db_user = "root";
             String db_pass = "632146rockyou";
             String db_url = "jdbc:mysql://localhost/lawui-haris";
@@ -32,6 +46,9 @@
                 out.print(metaData.getColumnName(i));
                 out.print("</td>");
             }
+            out.print("<td>");
+            out.print("delete");
+            out.print("</td>");
             out.print("</tr>");
             while (resultSet.next()) {
                 out.print("<tr>");
@@ -40,6 +57,9 @@
                     out.print(resultSet.getObject(i));
                     out.print("</td>");
                 }
+                out.print("<td>");
+                out.print("<a href=\"delete.jsp?id=" + resultSet.getObject(1) + "\">Delete</a>");
+                out.print("</td>");
                 out.print("</tr>");
             }
             out.print("</table>");
